@@ -1,0 +1,71 @@
+body {
+    margin: 0px;
+    background: url("../img/main.jpg") center center fixed;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    height: 10vh;
+    display: flex;
+    align-items: center;   
+    z-index: 999999999999999; 
+}
+
+header > span {
+    margin: 10px;
+    cursor: pointer;
+    font-family: sans-serif;
+}
+
+header > div {
+    position: absolute;
+    right: 40%;   
+}
+
+header > div > input, button {
+    border: pink solid 2px;
+}
+
+.searchedDiv {
+    position: relative;
+    margin-top: 20px;
+    display: flex;
+    border: 2px solid black;
+    width: 800px;
+    height: 600px;
+    background-color: white;
+}
+
+.searchedDiv > div {
+    width: 50%;
+}
+
+.rightDivInDiv {
+    overflow: auto;
+}
+
+p {
+    margin: 10px 40px;
+    /* text-overflow: ellipsis; */
+}
+
+.addToFavorite {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    background-color: black;
+    color: white;
+    border: none;
+}

@@ -1,0 +1,4 @@
+GET https://kitsu.io/api/edge/anime
+ 
+    Accept: : application/vnd.api+json,
+    Content-Type: application/vnd.api+json
