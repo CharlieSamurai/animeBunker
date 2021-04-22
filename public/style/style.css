@@ -69,3 +69,7 @@ p {
     color: white;
     border: none;
 }
+
+.inFavorite {
+    border: 2px solid green;
+}

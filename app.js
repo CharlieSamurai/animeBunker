@@ -8,6 +8,8 @@ const sessions = require('express-session');
 const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 const fetch = require('node-fetch');
+const User = require('./models/userModel');
+const Anime = require('./models/animeModel');
 const userRouter = require('./routers/userRouter');
 
 app.set('view engine', 'hbs');
@@ -53,6 +55,13 @@ app.post('/test', async (req, res) => {
     }
   });
   const aRespone = await response.json();
+  if (req.session?.user) {
+    const currentUser = await User.findById(req.session.user.id).populate('favorite');
+    const inFav = currentUser.favorite.map((a) => {
+      return a.title;
+    });
+    console.log(inFav);
+  };
   res.send(aRespone);
 });
 

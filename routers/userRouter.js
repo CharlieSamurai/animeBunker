@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const User = require('../models/userModel');
+const Anime = require('../models/animeModel');
 
 router.route('/register')
 .get((req, res) => {
@@ -31,6 +32,18 @@ router.route('/login')
     } else {
         res.sendStatus(401);
     }
+});
+
+router.route('/profile')
+.patch( async (req, res) => {
+    console.log(req.body);
+    console.log(req.session);
+    const newFavorite = new Anime(req.body);
+    const currentUser = await User.findById(req.session.user.id);
+    currentUser.favorite.push(newFavorite._id);
+    await newFavorite.save();
+    await currentUser.save();
+    res.sendStatus(200);
 });
 
 router.route('/logout')

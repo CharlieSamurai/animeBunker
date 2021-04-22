@@ -12,7 +12,7 @@ const userSchema = new Schema ({
     },
     favorite: [{
         type: Schema.Types.ObjectId,
-        ref: 'Title',
+        ref: 'Anime',
     }],
 })
 
