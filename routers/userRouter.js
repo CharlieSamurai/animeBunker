@@ -35,6 +35,11 @@ router.route('/login')
 });
 
 router.route('/profile')
+.get( async (req, res) => {
+    const currentUser = await User.findById(req.session.user.id).populate('favorite');
+    const favorites = currentUser.favorite;
+    res.render('profile', {favorites});
+})
 .patch( async (req, res) => {
     console.log(req.body);
     console.log(req.session);

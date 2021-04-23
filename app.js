@@ -11,6 +11,7 @@ const fetch = require('node-fetch');
 const User = require('./models/userModel');
 const Anime = require('./models/animeModel');
 const userRouter = require('./routers/userRouter');
+const animeRouter = require('./routers/animeRouter');
 
 app.set('view engine', 'hbs');
 app.set('cookieName', 'animeBunker');
@@ -40,6 +41,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/user', userRouter);
+app.use('/anime', animeRouter);
 
 app.get('/', (req, res) => {
     res.render('index');
@@ -55,14 +57,21 @@ app.post('/test', async (req, res) => {
     }
   });
   const aRespone = await response.json();
+  let dataToSend;
+
   if (req.session?.user) {
     const currentUser = await User.findById(req.session.user.id).populate('favorite');
     const inFav = currentUser.favorite.map((a) => {
       return a.title;
     });
-    console.log(inFav);
+    dataToSend = aRespone.data.filter(el => !inFav.includes(`Title: ${el.attributes.canonicalTitle}`));
+  } else {
+    dataToSend = aRespone.data.map(a => a);
   };
-  res.send(aRespone);
+
+  dataToSend.forEach(a => console.log(a.attributes.canonicalTitle));
+
+  res.send(dataToSend);
 });
 
 //=============================================================

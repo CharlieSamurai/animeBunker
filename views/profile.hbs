@@ -1,0 +1,16 @@
+<div id='profileMain'>
+{{#each favorites}}
+    <div class='profileDiv inFavorite' id={{this._id}}>
+        <div>
+            <img src={{this.img}} style='width: 100%; height: 100%;'>
+        </div>
+        <div class='rightDivInDiv'>
+            <p>{{this.title}}</p>
+            <p style='color:pink'>Episodes: {{this.episodes}}</p>
+            <p style='color:pink'>{{this.startDate}}</p>
+            <p><a href={{this.googleLink}} target="_blank">Google!</a></p>
+        </div>
+        <button class="removeFromFavorite">remove from favorites</button>
+    </div>
+{{/each}}
+</div>

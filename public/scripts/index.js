@@ -19,7 +19,7 @@ searchButton?.addEventListener('click', async () => {
         console.log(serverResponse);
         
         
-        serverResponse.data.sort(function (a, b) {
+        serverResponse.sort(function (a, b) {
             if (a.attributes.popularityRank > b.attributes.popularityRank) {
                 return 1;
             }
@@ -31,7 +31,7 @@ searchButton?.addEventListener('click', async () => {
 
         mainDiv.innerHTML = '';
         
-        serverResponse.data.forEach((el) => {
+        serverResponse.forEach((el) => {
             const newDiv = document.createElement('div');
             const leftDiv = document.createElement('div');
             const rightDiv = document.createElement('div');
@@ -56,6 +56,7 @@ searchButton?.addEventListener('click', async () => {
                         episodes: Number(divWithP.children[1].innerText.split(' ')[1]),
                         startDate: divWithP.children[2].innerText,
                         img: e.target.closest('.searchedDiv').children[0].children[0].src,
+                        googleLink: divWithP.children[4].children[0].href,
                     }),
                 });
                 e.target.closest('.searchedDiv').classList.add('inFavorite');
@@ -68,7 +69,7 @@ searchButton?.addEventListener('click', async () => {
             rightDivA.href = `https://www.google.com/search?q=${el.attributes.canonicalTitle}+anime`;
             rightDivA.target = '_blank';
             rightDivA.innerText = 'Search in Google!';
-            rightDivP.innerText = `Title: ${el.attributes.canonicalTitle}`;
+            rightDivP.innerText = el.attributes.canonicalTitle;
             rightDivPp.innerText = `Episodes: ${el.attributes.episodeCount}`;
             rightDivPpp.innerText = `Description: ${el.attributes.description}`;
             rightDivPpppp.innerText = `Start date: ${el.attributes.startDate}`;
@@ -80,6 +81,7 @@ searchButton?.addEventListener('click', async () => {
             newImg.src = el.attributes.posterImage.original;
             leftDiv.append(newImg);
             mainDiv.append(newDiv);
+            window.scrollTo(0, 0);
         });
     }
     catch(e) {

@@ -5,6 +5,7 @@ const animeSchema = new Schema ({
   episodes: Number,
   startDate: String,
   img: String,
+  googleLink: String,
 });
 
 const animeModel = model('Anime', animeSchema);
